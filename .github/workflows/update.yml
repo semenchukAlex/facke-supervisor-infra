@@ -11,6 +11,9 @@ on:
       environment:
         description: deprecated
         required: false
+      branch:
+        description: triggered branch
+        required: true
 jobs:
   deploy:
     environment: grimlock

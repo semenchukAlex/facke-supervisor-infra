@@ -17,7 +17,7 @@ on:
 jobs:
   deploy:
     environment: grimlock
-    runs-on: supervisor-team
+    runs-on: ubuntu-latest
     name: Bump for deploy
     steps:
       - name: Configure AWS credentials

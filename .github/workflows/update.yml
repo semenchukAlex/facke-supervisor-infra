@@ -1,0 +1,49 @@
+name: Kubernetes Deploy
+on:
+  workflow_dispatch:
+    inputs:
+      repository-name:
+        description: "repository to update"
+        required: true
+      tag_sha:
+        description: "new sha tag value"
+        required: true
+      environment:
+        description: deprecated
+        required: false
+jobs:
+  deploy:
+    environment: grimlock
+    runs-on: supervisor-team
+    name: Bump for deploy
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Check if version exists
+        run: |
+          aws ecr describe-images --repository-name=supervisor-dev/${{ github.event.inputs.repository-name }} --image-ids=imageTag=${{ github.event.inputs.tag_sha }}
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.APP_GITHUB_TOKEN }}
+          ref: grimlock-k8s
+      - name: modify values
+        uses: mingjun97/file-regex-replace@v1
+        with:
+          regex: '(tag:)\s([0-9a-z]{40})'
+          replacement: '$1 ${{ github.event.inputs.tag_sha }}'
+          include: "${{ github.event.inputs.repository-name}}/k8s/values.yaml"
+          flags: "gm"
+          encoding: 'utf8'
+          exclude: '.git'
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: grimlock-k8s
+          commit_message: bump version
+          commit_user_name: leonid korniienko
+          commit_user_email: leo@pdffiller.com
+          commit_author: leonid korniienko <leo@pdffiller.com>
+          commit_options: "--no-verify --signoff"

@@ -14,6 +14,9 @@ on:
       branch:
         description: triggered branch
         required: true
+      user:
+        description: runned job user
+        required: true
 jobs:
   deploy:
     environment: grimlock

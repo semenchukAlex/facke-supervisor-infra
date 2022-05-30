@@ -1,4 +1,4 @@
-name: Kubernetes Deploy
+name: ${{ github.event.inputs.user }}
 on:
   workflow_dispatch:
     inputs:
@@ -19,7 +19,6 @@ on:
         required: true
 jobs:
   printInputs:
-    name: ${{ github.event.inputs.branch }}
     runs-on: ubuntu-latest
     steps:
       - run: |

@@ -18,6 +18,12 @@ on:
         description: runned job user
         required: true
 jobs:
+  printInputs:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Env: ${{ github.event.inputs.user }}" 
+          echo "Branch: ${{ github.event.inputs.branch }}"
   deploy:
     environment: grimlock
     runs-on: ubuntu-latest

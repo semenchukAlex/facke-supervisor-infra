@@ -11,17 +11,15 @@ on:
       environment:
         description: deprecated
         required: false
-#      branch:
-#        description: triggered branch
-#        required: true
-#      user:
-#        description: runned job user
-#        required: true
-      caption:
-        description: 'user and branch'
+      branch:
+        description: triggered branch
+        required: true
+      user:
+        description: runned job user
         required: true
 jobs:
   printInputs:
+    name: ${{ github.event.inputs.branch }}
     runs-on: ubuntu-latest
     steps:
       - run: |

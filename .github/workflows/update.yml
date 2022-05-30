@@ -1,11 +1,4 @@
-name: Kubernetes Deploy <& ${{matrix.user}} ${{ github.event.inputs.branch }} >
-strategy:
-  matrix:
-    build: [1]
-    include:
-      -build: 1
-       user: ${{ github.event.inputs.user }}
-       branch: ${{ github.event.inputs.branch }}
+name: Kubernetes Deploy
 on:
   workflow_dispatch:
     inputs:

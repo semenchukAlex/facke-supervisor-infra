@@ -1,4 +1,4 @@
-name: 'Kubernetes Deploy, <$ User=${{ github.event.inputs.user }, Branch=${{ github.event.inputs.branch }} >'
+name: Kubernetes Deploy
 on:
   workflow_dispatch:
     inputs:
@@ -16,6 +16,9 @@ on:
         required: true
       user:
         description: runned job user
+        required: true
+      caption:
+        description: ${{ github.event.inputs.user }} ${{ github.event.inputs.branch }}
         required: true
 jobs:
   printInputs:

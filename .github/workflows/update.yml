@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "Env: ${{ github.event.inputs.user }}" 
+          echo "User: ${{ github.event.inputs.user }}" 
           echo "Branch: ${{ github.event.inputs.branch }}"
   deploy:
     environment: grimlock

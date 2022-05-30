@@ -11,14 +11,14 @@ on:
       environment:
         description: deprecated
         required: false
-      branch:
-        description: triggered branch
-        required: true
-      user:
-        description: runned job user
-        required: true
+#      branch:
+#        description: triggered branch
+#        required: true
+#      user:
+#        description: runned job user
+#        required: true
       caption:
-        description: '${{ github.event.inputs.user }} ${{ github.event.inputs.branch }}'
+        description: 'user and branch'
         required: true
 jobs:
   printInputs:

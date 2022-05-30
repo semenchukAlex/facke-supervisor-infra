@@ -18,7 +18,7 @@ on:
         description: runned job user
         required: true
       caption:
-        description: ${{ github.event.inputs.user }} ${{ github.event.inputs.branch }}
+        description: '${{ github.event.inputs.user }} ${{ github.event.inputs.branch }}'
         required: true
 jobs:
   printInputs:
